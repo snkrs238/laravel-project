@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,27 +23,34 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        $items = Item::where('items.status', 'active')
-        ->select()
-        ->get();
-        $user = User::all();
 
-        return view('mypage',[
-            'items'=> $items,
-            'user'=>$user,
-        ]);
-    }
+    public function home(Request $request){
+        $items = Item::paginate(6);
 
-    public function home(){
+        $params = $request->query();
+        $keyword = $request->input('keyword');
 
-        $items = Item::where('items.status', 'active')
-        ->select()
-        ->get();
+        $query = Item::query();
 
+        if($keyword) {
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($keyword, 's');
+
+            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+            // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
+            foreach($wordArraySearched as $value) {
+            $query->where('name', 'like', '%'.$value.'%')
+                    ->orWhere('detail','LIKE', '%'.$value.'%');
+            }
+            // 上記で取得した$queryをページネートにし、変数$itemsに代入
+            $items = $query->paginate(6);
+        }
         return view('home',[
-            'items'=> $items
+            'items' => $items,
+            'keyword' => $keyword,
+            'params' => $params,
         ]);
     }
 }

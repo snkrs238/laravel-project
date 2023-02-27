@@ -25,35 +25,33 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $keyword =$request->input('keyword');
-        $typeKeyword = $request->input('typeKeyword');
+        $params = $request->query();
 
         $query = Item::query();
 
-        if(isset($keyword)){
+        if(!empty($keyword)){
             $query->where('id','LIKE',"%{$keyword}%")
                 ->orWhere('name','LIKE',"%{$keyword}%");
 
-            $items =$query->get();
+            $items =$query->orderByDesc('created_at')->paginate(15);
 
             return view('item.index', compact('items','keyword'));
 
-        }elseif(isset($typeKeyword)){
-            $query->where('type',$typeKeyword);
+        // }elseif(isset($typeKeyword)){
+        //     $query->where('type',$typeKeyword);
         
 
-            $items =$query->get();
+        //     $items =$query->get();
 
-            return view('item.index', compact('items','typeKeyword'));
+        //     return view('item.index', compact('items','typeKeyword'));
         }else{
             // 商品一覧取得
         $items = Item::latest('updated_at')->get()->all();
-        $count = Item::get('id')->count();
 
         return view('item.index',[
             'items' => DB::table('items')->paginate(15),
             'keyword' => '',
-            'typeKeyword' =>'',
-            'count' =>$count,
+            'params' =>$params,
         ]);
         }
 }
@@ -73,6 +71,7 @@ class ItemController extends Controller
                 'price' => 'required',
                 'quantity' => 'required',
                 'detail' => 'required|max:255',
+                'image' => 'max:50000',
             ],[
                 'name.required'=>'名前は必須です。',
                 'type.required'=>'種類は必須です。',
@@ -80,6 +79,7 @@ class ItemController extends Controller
                 'price.required'=>'価格は必須です。',
                 'quantity.required'=>'在庫数は必須です。',
                 'detail.required'=>'詳細は必須です。',
+                'image.max' => '画像サイズを50MB以内にしてください。',
             ]);
 
             // 商品登録
@@ -128,11 +128,13 @@ class ItemController extends Controller
                 'detail'=>'required','max:500',
                 'name'=>'required','max:100',
                 'type' =>'required',
+                'image' => 'max:50000',
             ],
             [
                 'name.required' => '名前は必須です',
                 'detail.required' => '詳細は必須です',
                 'type.required' =>'種別を選択してください',
+                'image.max' => '画像サイズを50MB以内にしてください。',
             ]
             );
 

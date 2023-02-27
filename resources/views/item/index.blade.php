@@ -34,12 +34,12 @@
                                 <input type="text"  name="keyword" size="100" maxlength="100" value="{{ $keyword }}">
                             </div>
                             <div class="control-group mr-2">
-                                <select name="typeKeyword" class="h-100" value="{{ $typeKeyword }}">
-                                    <option value="">全て</option>
+                                <select name="type" class="h-100">
+                                    <option value="" selected="selected">全て</option>
                                     <option value="1" @if(old('type') == 1) selected @endif>野菜</option>
                                     <option value="2" @if(old('type') == 2) selected @endif>果物</option>
-                                    <option value="3" @if(old('type') == 3) selected @endif></option>
-                                    <option value="4" @if(old('type') == 4) selected @endif></option>
+                                    <option value="3" @if(old('type') == 3) selected @endif>肉類</option>
+                                    <option value="4" @if(old('type') == 4) selected @endif>魚介類</option>
                                 </select>
                             </div>
                             <div class="control-group">
@@ -61,8 +61,6 @@
                                 <th>ID</th>
                                 <th>ステータス</th>
                                 <th>商品名</th>
-                                <th>種別</th>
-                                <th>価格</th>
                                 <th>在庫数</th>
                                 <th>登録日時</th>
                                 <th></th>
@@ -80,18 +78,6 @@
                                         @endif
                                     </td>
                                     <td>{{ $item->name }}</td>
-                                    <td>
-                                        @if ($item->type == 1)
-                                            {{ "野菜"}}
-                                        @elseif ($item->type == 2)
-                                            {{ "果物" }}
-                                        @elseif ($item->type === 3)
-                                            {{ '肉類' }}
-                                        @elseif ($item->type === 4)
-                                            {{ '魚介類' }}
-                                        @endif
-                                    </td>
-                                    <td>{{ $item->price.'円' }}</td>
                                     <td>{{ $item->quantity }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>
@@ -103,7 +89,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="mt-2 ml-2">
+                    <div class="d-flex justify-content-center">
                         {!! $items->links() !!}
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 
 //商品削除確認
-$('#delete').on('click',function(){
+$('#itemDelete').on('click',function(){
   var result = window.confirm('削除して良いですか？');
 
   if(result ==true){
@@ -27,4 +27,19 @@ $(document).on('change', ':file', function() {
   numFiles = input.get(0).files ? input.get(0).files.length : 1,
   label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
   input.parent().parent().next(':text').val(label);
+});
+
+userDelete
+
+//ユーザー削除確認
+$('#userDelete').on('click',function(){
+  var result = window.confirm('削除して良いですか？');
+
+  if(result ==true){
+      window.alert('削除されました。');
+      return true;
+  }else{
+      window.alert('キャンセルしました。');
+      return false;
+  }
 });

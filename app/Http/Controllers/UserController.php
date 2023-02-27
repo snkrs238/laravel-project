@@ -16,61 +16,34 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * ユーザー一覧
      */
     public function index(Request $request)
     {   
-        if ($request->isMethod('post')) {
-            $users = User::where('id','=',$request->id)->first();
-            // バリデーション
-            $this->validate($request, [
-                'name' => 'required|max:100',
-                'email' => 'required','email','unique:user',
-                'password' => 'required','min:8',
-                'password_confirmation' => 'required',
-            ],[
-                'name.required'=>'名前は必須です。',
+        $keyword =$request->input('keyword');
 
-                'email.required'=>'メールアドレスは必須です。',
-                'email.email' => '有効なメールアドレス形式で指定してください。',
-                'email.unique' => '指定のメールアドレスは、既に使用されています。',
+        $query = User::query();
 
-                'password.required'=>'パスワードは必須です。',
-                'password.min' => 'パスワードは8文字以上にする必要があります。',
+        if(!empty($keyword)){
+            $query->where('id','LIKE',"%{$keyword}%")
+            ->orWhere('name','LIKE',"%{$keyword}%");
 
-                'password_confirmation.required'=>'パスワードは必須です。',
-                
-            ]);
-            $users->name = $request->name;
-            $users->email = $request->email;
-            $users->password = Hash::make($request->password);
-            $users->save();
+            $users = $query->orderByDesc('created_at')->paginate(15);
 
-            return redirect('/users');
-
+            return view('user.index', compact('users','keyword'));
         }else{
-            $keyword =$request->input('keyword');
+            $users=User::orderBy('created_at','desc')->get()->all();
 
-            $query = User::query();
-
-            if(!empty($keyword)){
-                $query->where('id','LIKE',"%{$keyword}%")
-                ->orWhere('name','LIKE',"%{$keyword}%");
-
-                $users = $query->get();
-
-                return view('user.index', compact('users','keyword'));
-            }else{
-                $users=User::orderBy('created_at','desc')->get()->all();
-
-                return view('user.index',[
-                    'users' => DB::table('users')->paginate(15),
-                    'keyword' => $keyword,
-                ]);
-            }
+            return view('user.index',[
+                'users' => DB::table('users')->paginate(15),
+                'keyword' => $keyword,
+            ]);
         }
 
     }
@@ -105,7 +78,7 @@ class UserController extends Controller
             $users->password = Hash::make($request->password);
             $users->save();
 
-            return redirect()->route('loginIndex');
+            return redirect()->route('loginIndex')->with('registerMessage','登録に成功しました。');
 
         }else{
             return view('user.register');
@@ -131,35 +104,28 @@ class UserController extends Controller
             
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->role = $request->role;
             if(isset($request->password)){
                 $user->password = Hash::make($request->password);
             }
             $user->save();
 
-            return redirect('/user');
+            return redirect('/users');
         }else{
             return view('user.editor',[
                 'user'=>$user
             ]);
         }
     }
-        //ログイン
-        public function detail(Request $request){
+    //詳細
+    public function detail(Request $request){
 
-            $user = User::find($request->id);
+        $user = User::find($request->id);
 
-            if ($request->isMethod('post')) {
-                $user->role = $request->role;
-                $user->save();
-    
-                return redirect('/users');
-            }else{
-                return view('user.detail',[
-                    'user' => $user,
-                ]);
-            }
-    
-        }
+        return view('user.detail',[
+            'user' => $user,
+        ]);
+    }
 
     //ログイン
     public function login(Request $request){
@@ -176,18 +142,22 @@ class UserController extends Controller
 
             if(Auth::attempt($validate)){
                 $request->session()->regenerate();
-                return redirect()->route('myPage');
+                return redirect()->route('home');
             }
 
     
         }else{
             if(Auth::check()){
-                return redirect()->route('myPage');
+                return redirect()->route('home');
             }else{
                 return view('user.login');
             }
         }
-
+        //ログイン失敗時
+        return back()->withErrors([
+            'Auth' => 'ログインに失敗しました。',
+            'comment' => 'メールアドレス、パスワードを確認してください。'
+        ])->onlyInput('email');
     }
 
     //ログアウト
@@ -202,5 +172,12 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('loginIndex');
+    }
+
+    //削除
+    public function delete(Request $request){
+        User::find($request->id)->delete();
+
+        return redirect('/users');
     }
 }

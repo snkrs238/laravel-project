@@ -32,10 +32,13 @@
                                 </span>
                             </label>
                             <input type="text" class="form-control" readonly="">
+                            <div class="error p-0 text-danger">
+                                <p class="alert-danger rounded mt-1">{{$errors->first('image')}}</p>
+                            </div>
                         </div>
-                        {{-- <div class="col-sm-4">
-                            <img src="data:image/png;base64,{{ $item->image }}" id="img">
-                        </div> --}}
+                        <div class="col-sm-4">
+                            <img src="" id="img">
+                        </div>
                         <div class="form-group">
                             <label for="type">種別</label>
                             <select name="type" class="form-control">

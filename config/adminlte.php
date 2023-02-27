@@ -225,72 +225,45 @@ return [
     */
 
     'menu' => [
-        [
-            'text'    => 'マイページ',
-            'icon'    => 'fas fa-fw fa-home',
-            'url'  => '/myPage',
-        ],
-        [
-            'text'    => '商品管理',
-            'icon'    => 'fas fa-fw fa-file',
-            'can'     => 'admin',
-            'submenu' => [
-                [
-                    'text' => '在庫管理',
-                    'url'  => 'items',
-                ],
-                [
-                    'text' => '注文履歴',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        [
-            'text'    => 'ユーザー管理',
-            'icon'    => 'fas fa-fw fa-user',
-            'can'     => 'admin',
-            'submenu' => [
-                [
-                    'text' => '顧客管理',
-                    'url'  => 'users',
-                    'can'  => 'superAdmin',
-                ],
-                [
-                    'text' => 'お問い合わせ',
-                    'url'  => 'contact',
-                ],
-            ],
-        ],
-        [
-            'text' => '設定',
-            'icon'    => 'fas fa-fw fa-cog',
-            'url'  => 'users/edit/',
-        ],
         // [
-        //     'text' => '商品管理',
-        //     'icon' => 'far fa-fw fa-file',
+        //     'text'    => '商品管理',
+        //     'icon'    => 'fas fa-fw fa-file',
+        //     'can'     => 'admin',
         //     'submenu' => [
-        //         'text' => '在庫管理',
-        //         'url'  => 'items',
-        //     ],
-        //     [
-        //         'text' => '注文履歴',
-        //         'url'  => 'items',
+        //         [
+        //             'text' => '在庫管理',
+        //             'url'  => 'items',
+        //         ],
+        //         [
+        //             'text' => '注文履歴',
+        //             'url'  => '#',
+        //         ],
         //     ],
         // ],
         // [
-        //     'text' => 'ユーザー管理',
-        //     'icon' => 'fas fa-fw fa-user',
+        //     'text'    => 'ユーザー管理',
+        //     'icon'    => 'fas fa-fw fa-user',
+        //     'can'     => 'admin',
         //     'submenu' => [
-        //         'text' => '顧客管理',
-        //         'url'  => 'users',
-        //     ],
-        //     [
-        //         'text' => 'お問い合わせ',
-        //         'url'  => '',
-        //         'icon' => 'fas fa-fw fa-share',
-        //     ],
-        //],
+        //         [
+        //             'text' => '顧客管理',
+        //             'url'  => 'users',
+        //             'can'  => 'superAdmin',
+        //         ],
+        // ],
+        [
+            'text' => '商品管理',
+            'icon' => 'fas fa-fw fa-file',
+            'url'  => 'items',
+            'can' =>'admin',
+        ],
+        [
+            'text' => 'ユーザー管理',
+            'icon'    => 'fas fa-fw fa-user',
+            'url'  => 'users',
+            'can' =>'admin',
+        ],
+
         
 
         // AdminLTEデフォルト

@@ -25,8 +25,8 @@
                 <div class="form-group d-flex">
                     <div class="control-group">
                         <label for="status">ステータス : </label>
-                        <label><input type="radio"  name="status" value="active" @if (old('status', $item->status ) == "active") checked @endif>有効</label>
-                        <label><input type="radio"  name="status" value="deleted" @if (old('status', $item->status ) == "deleted") checked @endif>無効</label>
+                        <label><input type="radio"  name="status" value="active" @if (old('status', $item->status ) == "active") checked @endif>表示</label>
+                        <label><input type="radio"  name="status" value="deleted" @if (old('status', $item->status ) == "deleted") checked @endif>非表示</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -144,13 +144,17 @@
                     </label>
                     <input type="text" class="form-control" readonly="">
                 </div>
+                <label for="">画像容量を50KB以下にしてください。</label>
+                <div class="error p-0 text-danger">
+                    <p class="alert-danger rounded mt-1">{{$errors->first('image')}}</p>
+                </div>
                 <div class="col-sm-4">
                     <img src="data:image/png;base64,{{ $item->image }}" id="img">
                 </div>
             </div>
             <div class="card-footer justify-content-center ">
                 <button type="submit" class="btn btn-sm btn-primary" id="update">更新</button>
-                <button type="submit" class="btn btn-sm btn-danger" formaction="/items/delete/{{ $item->id }}" id="delete">削除</button>
+                <button type="submit" class="btn btn-sm btn-danger" formaction="/items/delete/{{ $item->id }}" id="itemDelete">削除</button>
             </div>
         </form>
     </div>

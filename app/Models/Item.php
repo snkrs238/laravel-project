@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Scope;
 
 class Item extends Model
 {
@@ -24,6 +26,10 @@ class Item extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+    
+    public function scopeType($query,$type){
+        return $query->where('type',$type);
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.head')
 
 @section('title', 'ユーザー登録')
 
@@ -11,11 +11,18 @@
 @include('navi')
 
 <div class="container-fluid">
+    {{-- フラッシュメッセージ --}}
+    @if(session('registerMessage'))
+    <div class="alert alert-success text-center">
+        {{ session('registerMessage') }}
+    </div>
+    @endif
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4">
             <form action="{{ route('register') }}" method="post">
                 @csrf
+                <h1 class="login-box-msg text-center">新規登録</h1>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">名前</label>
@@ -47,7 +54,12 @@
                         <p class="alert-danger rounded mt-1">{{$errors->first('password_confirmation')}}</p>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary ml-5">登録</button>
+                <div class=" d-flex align-items-center">
+                    <button type="submit" class="btn btn-primary ml-5">登録</button>
+                    <div class="register-link ml-3">
+                        <a href="/account/login">ログイン</a>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="col-4"></div>

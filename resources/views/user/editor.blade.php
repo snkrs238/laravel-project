@@ -16,16 +16,23 @@
     <div class="col-12">
         <div class="card card-purple">
             <div class="card-header">
-                <h2 class="card-title">{{ 'ID:'.Auth::user()->id }}</h2>
+                <h2 class="card-title">{{ 'ID:'.$user->id }}</h2>
             </div>
-        <form action="/users/edit/{{ Auth::user()->id }}" method="post">
+        <form action="/users/edit/{{ $user->id}}" method="post">
             @csrf
-            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="id" value="{{ $user->id}}">
             <div class="card-body">
                 <div class="form-group">
                     <div class="control-group">
+                        <label for="role">管理者権限の切り替え : </label>
+                        <label><input type="radio"  name="role" value="1" {{ $user->role == 1  ? 'checked' : '' }}>管理者</label>
+                        <label><input type="radio"  name="role" value="0" {{ $user->role == 0  ? 'checked' : '' }}>ユーザー</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-group">
                         <label for="name">名前</label>
-                        <input type="text" class="form-control" value="{{ Auth::user()->name  }}">
+                        <input type="text" name="name" class="form-control" value="{{ $user->name}}">
                     </div>
                     <div class="error p-0 text-danger">
                         <p class="alert-danger rounded mt-1">{{$errors->first('name')}}</p>
@@ -34,27 +41,16 @@
                 <div class="form-group">
                     <div class="control-group">
                         <label for="email">メールアドレス</label>
-                        <input type="email" class="form-control" value="{{ Auth::user()->email }}">
+                        <input type="email" name="email" class="form-control" value="{{ $user->email }}">
                     </div>
                     <div class="error p-0 text-danger">
                         <p class="alert-danger rounded mt-1">{{$errors->first('email')}}</p>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="control-group">
-                        <label for="password">パスワード</label>
-                        <input type="password" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="control-group">
-                        <label for=""></label>
-                        <input type="text">
-                    </div>
-                </div>
             </div>
             <div class="card-footer justify-content-center ">
                 <button type="submit" class="btn btn-sm btn-primary" id="update">更新</button>
+                <button type="submit" class="btn btn-sm btn-danger" formaction="/users/delete/{{ $user->id }}" id="userDelete">削除</button>
             </div>
         </form>
         </div>
@@ -62,3 +58,7 @@
 </div>
 
 @stop    
+
+@section('js')
+    <script src="{{ asset('js/editor.js') }}"></script>
+@stop

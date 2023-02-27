@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.head')
 
 @section('title', 'create/user')
 
@@ -38,19 +38,18 @@
         <div class="col-4"></div>
     </div>
 </div> --}}
-<div class="login-box container-fluid">
+    <div class="login-box container-fluid">
+       {{-- フラッシュメッセージ --}}
+    @if(session('add_message'))
+    <div class="alert alert-success text-center">
+        {{ session('add_message') }}
+    </div>
+    @endif
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4">
-            <div class="login-logo">
-                <a href="/"><b>Admin</b>LTE</a>
-            </div>
-            <!-- /.login-logo -->
             <div class="login-box-body">
-                <p class="login-box-msg">ログインしてください。</p>
-                <div class="register-link">
-                    <a href="/account/register">新規登録</a>
-                </div>
+                <h3 class="login-box-msg mb-5 text-center">ログインしてください。</h3>
 
                 <form action="{{ route('login') }}" method="post">
                     @csrf
@@ -85,8 +84,11 @@
                             </div>
                         </div> --}}
                         <!-- /.col -->
-                        <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat ml-2">ログイン</button>
+                        <div class="col-xs-4 d-flex align-items-center">
+                            <button type="submit" class="btn btn-primary ml-2">ログイン</button>
+                            <div class="register-link ml-3">
+                                <a href="/account/register">新規登録</a>
+                            </div>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -98,20 +100,4 @@
             </div>
             <div class="col-4"></div>
         </div>
-    <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
-
-<!-- jQuery 3 -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<!-- iCheck -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
-        });
-    });
-</script>
