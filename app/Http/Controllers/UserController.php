@@ -53,23 +53,26 @@ class UserController extends Controller
 
         if ($request->isMethod('post')) {
             // バリデーション
-            $this->validate($request, [
-                'name' => 'required|max:100',
-                'email' => 'required','email','unique:user',
-                'password' => 'required','min:8',
-                'password_confirmation' => 'required',
+            $request->validate([
+                'name' => ['required', 'string', 'max:50'],
+                'email' => ['required', 'string', 'email', 'max:254', 'unique:users'],
+                'password' => ['required', 'string', 'max:128',password::min(8), 'confirmed' ],
+                'password_confirmation' => ['required', 'string'],
             ],[
-                'name.required'=>'名前は必須です。',
-
-                'email.required'=>'メールアドレスは必須です。',
+                'name.required' => 'ユーザー名は必須です。',
+                'name.max' => 'ユーザー名は、 50 文字以内にする必要があります。',
+    
+                'email.required' => 'メールアドレスは必須です。',
                 'email.email' => '有効なメールアドレス形式で指定してください。',
+                'email.max' => 'メールアドレスは、 254 文字以内にする必要があります。',
                 'email.unique' => '指定のメールアドレスは、既に使用されています。',
-
-                'password.required'=>'パスワードは必須です。',
+    
+                'password.required' => 'パスワードは必須です。',
+                'password.max' => 'パスワードは、 128 文字以内にする必要があります。',
+                'password.confirmed' => 'パスワード【確認】と入力内容が一致しません。',
                 'password.min' => 'パスワードは8文字以上にする必要があります。',
-
-                'password_confirmation.required'=>'パスワードは必須です。',
-                
+    
+                'password_confirmation.required' => 'パスワード【確認】は必須です。',
             ]);
 
             $users =new user();

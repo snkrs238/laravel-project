@@ -36,6 +36,7 @@
                                 <p class="alert-danger rounded mt-1">{{$errors->first('image')}}</p>
                             </div>
                         </div>
+                        <label for="">画像容量を50KB以下にしてください。</label>
                         <div class="col-sm-4">
                             <img src="" id="img">
                         </div>

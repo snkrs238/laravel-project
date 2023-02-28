@@ -148,9 +148,11 @@
                 <div class="error p-0 text-danger">
                     <p class="alert-danger rounded mt-1">{{$errors->first('image')}}</p>
                 </div>
-                <div class="col-sm-4">
-                    <img src="data:image/png;base64,{{ $item->image }}" id="img">
-                </div>
+                @if(isset($item->image))
+                    <div class="col-sm-4 w-80">
+                        <img src="data:image/png;base64,{{ $item->image }}" id="img">
+                    </div>
+                @endif
             </div>
             <div class="card-footer justify-content-center ">
                 <button type="submit" class="btn btn-sm btn-primary" id="update">更新</button>

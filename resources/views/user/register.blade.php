@@ -34,9 +34,9 @@
                     <div class="form-group">
                         <label for="email">メールアドレス</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="メールアドレス" value="{{ old('email') }}">
-                        <div class="error p-0 text-danger">
-                            <p class="alert-danger rounded mt-1">{{$errors->first('email')}}</p>
-                        </div>
+                        @if ($errors->has('email'))
+                            <p class="alert-danger rounded mt-1">{{ $errors->first('email')}}</p>
+                        @endif
                     </div>
 
                     <div class="form-group">
