@@ -26,10 +26,11 @@ class ItemController extends Controller
     {
         $keyword =$request->input('keyword');
         $params = $request->query();
+        $typeKeyword = $request->input('typeKeyword');
 
         $query = Item::query();
 
-        if(!empty($keyword)){
+        if(isset($keyword)){
             $query->where('id','LIKE',"%{$keyword}%")
                 ->orWhere('name','LIKE',"%{$keyword}%");
 
@@ -37,19 +38,19 @@ class ItemController extends Controller
 
             return view('item.index', compact('items','keyword'));
 
-        // }elseif(isset($typeKeyword)){
-        //     $query->where('type',$typeKeyword);
+        }elseif(!empty($typeKeyword)){
+            $query = Item::where('type',$typeKeyword);
         
 
-        //     $items =$query->get();
+            $items =$query->orderByDesc('created_at')->paginate(15);
 
-        //     return view('item.index', compact('items','typeKeyword'));
+            return view('item.index', compact('items','typeKeyword','keyword'));
         }else{
             // 商品一覧取得
         $items = Item::latest('updated_at')->get()->all();
 
         return view('item.index',[
-            'items' => DB::table('items')->paginate(15),
+            'items' => DB::table('items')->paginate(10),
             'keyword' => '',
             'params' =>$params,
         ]);
@@ -80,6 +81,7 @@ class ItemController extends Controller
                 'quantity.required'=>'在庫数は必須です。',
                 'detail.required'=>'詳細は必須です。',
                 'image.max' => '画像サイズを50MB以内にしてください。',
+                'detail.max' => '文字を255文字までにしてください。'
             ]);
 
             // 商品登録

@@ -19,13 +19,6 @@
             <div class="card card-purple">
                 <div class="card-header">
                     <h3 class="card-title">商品検索</h3>
-                    {{-- <div class="dropdown text-right">
-                        <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown">操作</button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                            <a class="dropdown-item text-muted js-download" href="/items/downloadPdf">pdf</a>
-                            <a class="dropdown-item text-muted js-download" href="/items/downloadExcel">Excel</a>
-                        </div>
-                    </div> --}}
                 </div>
                 <div class="card-body">
                     <form action="{{ url('items') }}" method="get">
@@ -34,7 +27,7 @@
                                 <input type="text"  name="keyword" size="100" maxlength="100" value="{{ $keyword }}">
                             </div>
                             <div class="control-group mr-2">
-                                <select name="type" class="h-100">
+                                <select name="typeKeyword" class="h-100">
                                     <option value="" selected="selected">全て</option>
                                     <option value="1" @if(old('type') == 1) selected @endif>野菜</option>
                                     <option value="2" @if(old('type') == 2) selected @endif>果物</option>

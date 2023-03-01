@@ -195,7 +195,7 @@
                         </li>
                     </ul>
                     <div class="card-body">
-                        <button type="button" class="btn btn-sm btn-primary btn-tool" data-bs-toggle="modal" data-card-widget="collapse" data-bs-target="#homeModal">詳細</button>
+                        <button type="button" id="modalOpen" class="btn btn-sm btn-primary btn-tool" data-bs-toggle="modal" data-card-widget="collapse" data-bs-target="#homeModal">詳細</button>
                     </div>
                 </div>
                 {{-- 詳細モーダル --}}
@@ -410,12 +410,12 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">OK</button>
+                            {{-- <button type="button" class="btn btn-primary">OK</button> --}}
                           </div>
                         </div>
                       </div>
                 </div>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
         @endforeach
     </div>
     <div class="d-flex justify-content-center">
@@ -424,9 +424,9 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/pagination.css">
 @stop
 
 @section('js')
+    <script src="modal.js"></script>
 @stop
 

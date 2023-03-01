@@ -149,7 +149,7 @@
                     <p class="alert-danger rounded mt-1">{{$errors->first('image')}}</p>
                 </div>
                 @if(isset($item->image))
-                    <div class="col-sm-4 w-80">
+                    <div class="col-sm-4">
                         <img src="data:image/png;base64,{{ $item->image }}" id="img">
                     </div>
                 @endif
