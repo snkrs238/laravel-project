@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <label for="">画像容量を50KB以下にしてください。</label>
-                        <div class="col-sm-4">
+                        <div class="mb-2">
                             <img src="" id="img">
                         </div>
                         <div class="form-group">

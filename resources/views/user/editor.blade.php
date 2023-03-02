@@ -25,6 +25,7 @@
                 <div class="form-group">
                     <div class="control-group">
                         <label for="role">管理者権限の切り替え : </label>
+                        <label><input type="radio"  name="role" value="2" {{ $user->role == 2  ? 'checked' : '' }}>システム管理者</label>
                         <label><input type="radio"  name="role" value="1" {{ $user->role == 1  ? 'checked' : '' }}>管理者</label>
                         <label><input type="radio"  name="role" value="0" {{ $user->role == 0  ? 'checked' : '' }}>ユーザー</label>
                     </div>

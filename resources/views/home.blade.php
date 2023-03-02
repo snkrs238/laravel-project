@@ -10,19 +10,22 @@
 
 @section('content')
 @include('navi')
-<div class="card text-right">
-    <div class="card-body">
-        <div class="search">
-            <form action="{{ route('home') }}" method="get">
-                <div class="form-group ">
-                    <div class="control-group">
-                        <input type="search"  name="keyword" size="30" maxlength="30" value="{{ $keyword }}" placeholder="商品名を入力してください。">
-                        <input type="submit" class="btn btn-sm btn-primary" value="検索">
-                    </div>
-                </div>
-            </form>
+<div class="search text-right m-3">
+    <form action="{{ route('home') }}" method="get">
+        <div class="form-group ">
+            <div class="control-group">
+                <input type="search"  name="keyword" size="30" maxlength="30" value="{{ $keyword }}" placeholder="商品名を入力してください。">
+                <select name="typeKeyword" class="h-100">
+                    <option value="" selected="selected">全て</option>
+                    <option value="1" @if(old('type') == 1) selected @endif>野菜</option>
+                    <option value="2" @if(old('type') == 2) selected @endif>果物</option>
+                    <option value="3" @if(old('type') == 3) selected @endif>肉類</option>
+                    <option value="4" @if(old('type') == 4) selected @endif>魚介類</option>
+                </select>
+                <input type="submit" class="btn btn-sm btn-primary" value="検索">
+            </div>
         </div>
-    </div>
+    </form>
 </div>
         
 
@@ -207,6 +210,7 @@
                             {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                           </div>
                           <div class="modal-body">
+                            <input type="hidden" value="{{ $item->id }}">
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="control-group">
@@ -416,6 +420,8 @@
                       </div>
                 </div>
                 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
+                     {{-- jQuery --}}
+                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         @endforeach
     </div>
     <div class="d-flex justify-content-center">
@@ -424,6 +430,7 @@
 @stop
 
 @section('css')
+<script src="modal.css"></script>
 @stop
 
 @section('js')

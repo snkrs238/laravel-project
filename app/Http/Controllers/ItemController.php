@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Models\category;
 use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
@@ -33,29 +34,26 @@ class ItemController extends Controller
         if(isset($keyword)){
             $query->where('id','LIKE',"%{$keyword}%")
                 ->orWhere('name','LIKE',"%{$keyword}%");
+        }
 
-            $items =$query->orderByDesc('created_at')->paginate(15);
-
-            return view('item.index', compact('items','keyword'));
-
-        }elseif(!empty($typeKeyword)){
+        if(!empty($typeKeyword)){
             $query = Item::where('type',$typeKeyword);
         
+        }
+        $items =$query->orderByDesc('updated_at')->paginate(15);
 
-            $items =$query->orderByDesc('created_at')->paginate(15);
-
-            return view('item.index', compact('items','typeKeyword','keyword'));
-        }else{
-            // 商品一覧取得
-        $items = Item::latest('updated_at')->get()->all();
+        //     return view('item.index', compact('items','typeKeyword','keyword'));
+        //     // 商品一覧取得
+        // $items = Item::latest('updated_at')->get()->all();
+        
 
         return view('item.index',[
-            'items' => DB::table('items')->paginate(10),
-            'keyword' => '',
+            'items' => $items,
+            'keyword' => $keyword,
+            'typeKeyword' =>$typeKeyword,
             'params' =>$params,
         ]);
-        }
-}
+    }
 
     /**
      * 商品登録

@@ -15,6 +15,15 @@ $('#itemDelete').on('click',function(){
 //画像イメージプレビュー
 $('#inputFile').on('change',function(e){
   var reader = new FileReader();
+
+  var file = e.target.files[0];
+
+  //アップロードしようとしたものが画像じゃない場合、処理を終了します。
+  if(file.type.indexOf('image') < 0){
+    alert("画像ファイルを指定してください。");
+    return false;
+  }
+
   reader.onload = function (e) {
       $("#img").attr('src', e.target.result);
   }
@@ -24,7 +33,6 @@ $('#inputFile').on('change',function(e){
 //画像イメージ名表示
 $(document).on('change', ':file', function() {
   var input = $(this),
-  numFiles = input.get(0).files ? input.get(0).files.length : 1,
   label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
   input.parent().parent().next(':text').val(label);
 });
@@ -43,3 +51,4 @@ $('#userDelete').on('click',function(){
       return false;
   }
 });
+

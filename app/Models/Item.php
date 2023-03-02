@@ -32,6 +32,12 @@ class Item extends Model
         return $query->where('type',$type);
     }
 
+    //「商品(products)はカテゴリ(category)に属する」というリレーション関係を定義する
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
