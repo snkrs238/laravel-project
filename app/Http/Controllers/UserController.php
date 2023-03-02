@@ -34,7 +34,7 @@ class UserController extends Controller
             $query->where('id','LIKE',"%{$keyword}%")
             ->orWhere('name','LIKE',"%{$keyword}%");
 
-            $users = $query->orderByDesc('created_at')->paginate(15);
+            $users = $query->orderByDesc('updated_at','desc')->paginate(15);
 
             return view('user.index', compact('users','keyword'));
         }else{
