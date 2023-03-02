@@ -38,7 +38,7 @@ class UserController extends Controller
 
             return view('user.index', compact('users','keyword'));
         }else{
-            $users=User::orderBy('created_at','desc')->get()->all();
+            $users=User::orderBy('updated_at','desc')->get()->all();
 
             return view('user.index',[
                 'users' => DB::table('users')->paginate(15),
