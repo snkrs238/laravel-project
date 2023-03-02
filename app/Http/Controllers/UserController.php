@@ -30,21 +30,19 @@ class UserController extends Controller
 
         $query = User::query();
 
-        if(!empty($keyword)){
+        if(isset($keyword)){
             $query->where('id','LIKE',"%{$keyword}%")
             ->orWhere('name','LIKE',"%{$keyword}%");
-
-            $users = $query->orderByDesc('updated_at','desc')->paginate(15);
-
-            return view('user.index', compact('users','keyword'));
-        }else{
-            $users=User::orderBy('updated_at','desc')->get()->all();
-
-            return view('user.index',[
-                'users' => DB::table('users')->paginate(15),
-                'keyword' => $keyword,
-            ]);
         }
+        $users = $query->orderByDesc('updated_at')->paginate(15);
+
+        
+
+        return view('user.index',[
+            'users' => $users,
+            'keyword' => $keyword,
+        ]);
+        
 
     }
 
