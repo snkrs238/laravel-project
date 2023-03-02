@@ -34,6 +34,7 @@
                                 <th>メールアドレス</th>
                                 <th></th>
                                 <th>登録日時</th>
+                                <th>更新日時</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -53,6 +54,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $user->created_at }}</td>
+                                    <td>{{ $user->updated_at }}</td>
                                     @can('superAdmin')
                                     <td>
                                         <form action="/users/detail/{{ $user->id }}" method="get">
