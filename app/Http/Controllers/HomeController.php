@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
 
     public function home(Request $request){
-        $items = Item::orderByDesc('updated_at')->paginate(6);
+        $items = Item::where('items.status','active')->orderByDesc('updated_at')->paginate(6);
 
         $keyword = $request->input('keyword');
 

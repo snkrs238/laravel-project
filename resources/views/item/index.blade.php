@@ -46,6 +46,7 @@
             <div class="card card-purple">
                 <div class="card-header">
                     <h3 class="card-title">商品一覧</h3>
+                    <h5>{{ ":".$count."件" }}</h5>
                 </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">

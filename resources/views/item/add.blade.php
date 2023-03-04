@@ -32,9 +32,6 @@
                                 </span>
                             </label>
                             <input type="text" class="form-control" readonly="">
-                            <div class="error p-0 text-danger">
-                                <p class="alert-danger rounded mt-1">{{$errors->first('image')}}</p>
-                            </div>
                         </div>
                         <label for="">画像容量を50KB以下にしてください。</label>
                         <div class="mb-2">

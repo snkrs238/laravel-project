@@ -41,6 +41,7 @@ class ItemController extends Controller
         
         }
         $items =$query->orderByDesc('updated_at')->paginate(15);
+        $count = $items->count();
 
         //     return view('item.index', compact('items','typeKeyword','keyword'));
         //     // 商品一覧取得
@@ -52,6 +53,7 @@ class ItemController extends Controller
             'keyword' => $keyword,
             'typeKeyword' =>$typeKeyword,
             'params' =>$params,
+            'count'=>$count,
         ]);
     }
 
@@ -66,7 +68,7 @@ class ItemController extends Controller
             $this->validate($request, [
                 'name' => 'required|max:100',
                 'type' => 'required',
-                'image' => 'required',
+                'image' => 'required','max',
                 'production_aria' => 'required',
                 'price' => 'required',
                 'quantity' => 'required',
