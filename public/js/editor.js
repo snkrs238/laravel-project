@@ -37,7 +37,6 @@ $(document).on('change', ':file', function() {
   input.parent().parent().next(':text').val(label);
 });
 
-userDelete
 
 //ユーザー削除確認
 $('#userDelete').on('click',function(){

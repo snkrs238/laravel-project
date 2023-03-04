@@ -66,6 +66,7 @@ class ItemController extends Controller
             $this->validate($request, [
                 'name' => 'required|max:100',
                 'type' => 'required',
+                'image' => 'required',
                 'production_aria' => 'required',
                 'price' => 'required',
                 'quantity' => 'required',
@@ -74,6 +75,7 @@ class ItemController extends Controller
             ],[
                 'name.required'=>'名前は必須です。',
                 'type.required'=>'種類は必須です。',
+                'image.required'=>'画像は必須です。',
                 'production_aria.required'=>'産地は必須です。',
                 'price.required'=>'価格は必須です。',
                 'quantity.required'=>'在庫数は必須です。',

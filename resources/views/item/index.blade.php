@@ -54,8 +54,9 @@
                                 <th>ID</th>
                                 <th>ステータス</th>
                                 <th>商品名</th>
+                                <th>種別</th>
                                 <th>在庫数</th>
-                                <th>登録日時</th>
+                                <th>更新日時</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -71,8 +72,19 @@
                                         @endif
                                     </td>
                                     <td>{{ $item->name }}</td>
+                                    <td>
+                                        @if ($item->type == 1)
+                                            {{ "野菜"}}
+                                        @elseif ($item->type == 2)
+                                            {{ "果物" }}
+                                        @elseif ($item->type == 3)
+                                            {{ "肉類" }}
+                                        @elseif ($item->type == 4)
+                                            {{ '魚介類' }}
+                                        @endif
+                                    </td>
                                     <td>{{ $item->quantity }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ $item->updated_at }}</td>
                                     <td>
                                         <form action="items/detail/{{ $item->id }}" method="get">
                                             <button type="submit" class="btn btn-sm btn-primary">詳細</button>

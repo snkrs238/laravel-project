@@ -25,9 +25,8 @@ class HomeController extends Controller
      */
 
     public function home(Request $request){
-        $items = Item::paginate(6);
+        $items = Item::orderByDesc('updated_at')->paginate(6);
 
-        $params = $request->query();
         $keyword = $request->input('keyword');
 
         $query = Item::query();
@@ -36,7 +35,7 @@ class HomeController extends Controller
             // 全角スペースを半角に変換
             $spaceConversion = mb_convert_kana($keyword, 's');
 
-            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+            // 単語を半角スペースで区切り、配列にする
             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
 
             // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
@@ -45,12 +44,11 @@ class HomeController extends Controller
                     ->orWhere('detail','LIKE', '%'.$value.'%');
             }
             // 上記で取得した$queryをページネートにし、変数$itemsに代入
-            $items = $query->paginate(6);
+            $items = $query->orderByDesc('updated_at')->paginate(6);
         }
         return view('home',[
             'items' => $items,
             'keyword' => $keyword,
-            'params' => $params,
         ]);
     }
 }

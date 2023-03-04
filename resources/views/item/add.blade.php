@@ -40,6 +40,9 @@
                         <div class="mb-2">
                             <img src="" id="img">
                         </div>
+                        <div class="error p-0 text-danger">
+                            <p class="alert-danger rounded mt-1">{{$errors->first('image')}}</p>
+                        </div>
                         <div class="form-group">
                             <label for="type">種別</label>
                             <select name="type" class="form-control">
