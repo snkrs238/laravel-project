@@ -55,7 +55,7 @@
                                 <th>ID</th>
                                 <th>ステータス</th>
                                 <th>商品名</th>
-                                <th>種別</th>
+                                <th>カテゴリ</th>
                                 <th>在庫数</th>
                                 <th>更新日時</th>
                                 <th></th>

@@ -35,11 +35,12 @@ class UserController extends Controller
             ->orWhere('name','LIKE',"%{$keyword}%");
         }
         $users = $query->orderByDesc('updated_at')->paginate(15);
-
+        $count = $users->count();
         
 
         return view('user.index',[
             'users' => $users,
+            'count' => $count,
             'keyword' => $keyword,
         ]);
         

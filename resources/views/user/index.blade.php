@@ -24,6 +24,7 @@
             <div class="card card-purple">
                 <div class="card-header">
                     <h3 class="card-title">ユーザー一覧</h3>
+                    <h4>{{":".$count."件"}}</h4>
                 </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
