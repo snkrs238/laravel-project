@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
-use App\Models\category;
-use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {

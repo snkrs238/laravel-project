@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Hash; //ハッシュ化
 
 use Illuminate\Validation\Rules\Password; 
 
-use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
