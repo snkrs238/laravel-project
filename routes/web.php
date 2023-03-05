@@ -57,7 +57,6 @@ Route::group(['middleware'=>['auth','can:admin']],function(){
     Route::prefix('users')->group(function (){
         Route::get('/',[App\Http\Controllers\UserController::class, 'index']);
         Route::post('/', [App\Http\Controllers\UserController::class, 'index']);
-        Route::get('/detail/{id}', [App\Http\Controllers\UserController::class,'detail']);
         Route::get('/edit/{id}', [App\Http\Controllers\UserController::class,'edit']);
         Route::post('/edit/{id}', [App\Http\Controllers\UserController::class,'edit']);
         Route::post('/delete/{id}', [App\Http\Controllers\UserController::class, 'delete']);

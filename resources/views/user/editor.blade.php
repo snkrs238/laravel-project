@@ -16,7 +16,7 @@
     <div class="col-12">
         <div class="card card-purple">
             <div class="card-header">
-                <h2 class="card-title">{{ 'ID:'.$user->id }}</h2>
+                <h2 class="card-title">{{ 'ユーザーID:'.$user->id }}</h2>
             </div>
         <form action="/users/edit/{{ $user->id}}" method="post">
             @csrf

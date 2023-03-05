@@ -35,7 +35,7 @@ class UserController extends Controller
             ->orWhere('name','LIKE',"%{$keyword}%");
         }
         $users = $query->orderByDesc('updated_at')->paginate(15);
-        $count = $users->count();
+        $count = $query->count();
         
 
         return view('user.index',[
@@ -119,16 +119,6 @@ class UserController extends Controller
             ]);
         }
     }
-    //詳細
-    public function detail(Request $request){
-
-        $user = User::find($request->id);
-
-        return view('user.detail',[
-            'user' => $user,
-        ]);
-    }
-
     //ログイン
     public function login(Request $request){
 

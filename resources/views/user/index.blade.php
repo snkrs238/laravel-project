@@ -24,7 +24,7 @@
             <div class="card card-purple">
                 <div class="card-header">
                     <h3 class="card-title">ユーザー一覧</h3>
-                    <h4>{{":".$count."件"}}</h4>
+                    <h5>{{":".$count."件"}}</h5>
                 </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
@@ -58,8 +58,8 @@
                                     <td>{{ $user->updated_at }}</td>
                                     @can('superAdmin')
                                     <td>
-                                        <form action="/users/detail/{{ $user->id }}" method="get">
-                                            <button type="submit" class="btn btn-sm btn-primary">詳細</button>
+                                        <form action="/users/edit/{{ $user->id }}" method="get">
+                                            <button type="submit" class="btn btn-sm btn-primary">編集</button>
                                         </form>
                                     </td>
                                     @endcan

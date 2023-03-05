@@ -4,7 +4,7 @@
 
 @section('content_header')
     <div class="form-group d-flex justify-content-between">
-        <h1>商品管理</h1>
+        <h1>商品登録</h1>
         <form action="/items" method="get">
             <button type="submit" class="btn btn-sm btn-secondary mr-3 text-right">一覧に戻る</button>
         </form>

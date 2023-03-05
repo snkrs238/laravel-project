@@ -31,22 +31,20 @@ class ItemController extends Controller
 
         $query = Item::query();
 
-        if(isset($keyword)){
+        if(isset($keyword) && isset($typeKeyword)){
+            $query->where('type',$typeKeyword)
+            ->Where('name','LIKE',"%{$keyword}%")
+            ->orWhere('id','LIKE',"%{$keyword}%");
+        }elseif(isset($keyword)){
             $query->where('id','LIKE',"%{$keyword}%")
                 ->orWhere('name','LIKE',"%{$keyword}%");
-        }
-
-        if(!empty($typeKeyword)){
+        }elseif(!empty($typeKeyword)){
             $query = Item::where('type',$typeKeyword);
-        
         }
-        $items =$query->orderByDesc('updated_at')->paginate(15);
-        $count = $items->count();
 
-        //     return view('item.index', compact('items','typeKeyword','keyword'));
-        //     // 商品一覧取得
-        // $items = Item::latest('updated_at')->get()->all();
-        
+        $items =$query->orderByDesc('updated_at')->paginate(15);
+        $count = $query->count();
+
 
         return view('item.index',[
             'items' => $items,
@@ -68,7 +66,7 @@ class ItemController extends Controller
             $this->validate($request, [
                 'name' => 'required|max:100',
                 'type' => 'required',
-                'image' => 'required','max',
+                'image' => 'max',
                 'production_aria' => 'required',
                 'price' => 'required',
                 'quantity' => 'required',
@@ -77,7 +75,6 @@ class ItemController extends Controller
             ],[
                 'name.required'=>'名前は必須です。',
                 'type.required'=>'種類は必須です。',
-                'image.required'=>'画像は必須です。',
                 'production_aria.required'=>'産地は必須です。',
                 'price.required'=>'価格は必須です。',
                 'quantity.required'=>'在庫数は必須です。',

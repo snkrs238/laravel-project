@@ -34,6 +34,18 @@
             </div>
             <div class="form-group">
                 <div class="control-group">
+                    <label class="col-sm-2 control-label" for="status">ステータス</label>
+                    <div class="col-sm-4">
+                        @if( $item->status =='active' )
+                            {{  '表示' }}
+                        @else
+                            {{ '非表示' }}
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-group">
                     <label class="col-sm-2 control-label" for="type">カテゴリ</label>
                     <div class="col-sm-4">
                         @if ($item->type === 1)
