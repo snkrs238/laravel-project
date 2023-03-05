@@ -29,10 +29,10 @@
                             <div class="control-group mr-2">
                                 <select name="typeKeyword" class="h-100">
                                     <option value="" selected="selected">全て</option>
-                                    <option value="1" @if(old('type') == 1) selected @endif>野菜</option>
-                                    <option value="2" @if(old('type') == 2) selected @endif>果物</option>
-                                    <option value="3" @if(old('type') == 3) selected @endif>肉類</option>
-                                    <option value="4" @if(old('type') == 4) selected @endif>魚介類</option>
+                                    <option value="1" @if($typeKeyword == 1) selected @endif>野菜</option>
+                                    <option value="2" @if($typeKeyword == 2) selected @endif>果物</option>
+                                    <option value="3" @if($typeKeyword == 3) selected @endif>肉類</option>
+                                    <option value="4" @if($typeKeyword == 4) selected @endif>魚介類</option>
                                 </select>
                             </div>
                             <div class="control-group">

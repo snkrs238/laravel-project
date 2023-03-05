@@ -32,12 +32,14 @@ class HomeController extends Controller
 
         $query = Item::query();
 
-        if(isset($keyword)){
+        if(isset($keyword) && isset($typeKeyword)){
+            $query->where('type',$typeKeyword)
+            ->Where('name','LIKE',"%{$keyword}%")
+            ->orWhere('id','LIKE',"%{$keyword}%");
+        }elseif(isset($keyword)){
             $query->where('id','LIKE',"%{$keyword}%")
                 ->orWhere('name','LIKE',"%{$keyword}%");
-        }
-
-        if(!empty($typeKeyword)){
+        }elseif(!empty($typeKeyword)){
             $query = Item::where('type',$typeKeyword);
         }
         // 上記で取得した$queryをページネートにし、変数$itemsに代入

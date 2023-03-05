@@ -17,10 +17,10 @@
                 <input type="search"  name="keyword" size="30" maxlength="30" value="{{ $keyword }}" placeholder="商品名を入力してください。">
                 <select name="typeKeyword" class="h-100">
                     <option value="" selected="selected">全て</option>
-                    <option value="1" @if(old('type') == 1) selected @endif>野菜</option>
-                    <option value="2" @if(old('type') == 2) selected @endif>果物</option>
-                    <option value="3" @if(old('type') == 3) selected @endif>肉類</option>
-                    <option value="4" @if(old('type') == 4) selected @endif>魚介類</option>
+                    <option value="1" @if($typeKeyword == 1) selected @endif>野菜</option>
+                    <option value="2" @if($typeKeyword  == 2) selected @endif>果物</option>
+                    <option value="3" @if($typeKeyword  == 3) selected @endif>肉類</option>
+                    <option value="4" @if($typeKeyword  == 4) selected @endif>魚介類</option>
                 </select>
                 <input type="submit" class="btn btn-sm btn-primary" value="検索">
             </div>
@@ -202,12 +202,12 @@
                         </li>
                     </ul>
                     <div class="card-body">
-                        <button type="button" class="btn btn-sm btn-primary btn-tool" data-toggle="modal" data-card-widget="collapse" data-target="#modalOpen" 
+                        <button type="button" class="btn btn-sm btn-primary btn-tool" data-toggle="modal" data-card-widget="collapse" data-target="#modalOpen{{ $item->id }}" 
                         data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-type="{{ $item->type }}" data-production_aria ="{{ $item->production_aria }}" data-price="{{ $item->price }}" data-quantity="{{ $item->quantity }}" data-detail="{{ $item->detail }} " data-image="{{ $item->image }}">詳細</button>
                     </div>
                 </div>
                 {{-- 詳細モーダル --}}
-                <div class="modal fade" id="modalOpen" tabindex="-1" aria-hidden="true" aria-labelledby="modalLabel">
+                <div class="modal fade" id="modalOpen{{ $item->id }}" tabindex="-1" aria-hidden="true" aria-labelledby="modalLabel">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header m-0">
@@ -215,7 +215,6 @@
                                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">✖️</button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden" value="{{ $item->id }}">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="control-group">
@@ -228,7 +227,7 @@
                                     <div class="form-group">
                                         <div class="control-group">
                                             <label class="col-sm-2 control-label" for="name">商品名</label>
-                                            <div class="modal-name col-sm-4"></div>
+                                            <div class="modal-name col-sm-4">{{ $item->name }}</div>
                                         </div>
                                     </div>
                                     <div class="form-group">
