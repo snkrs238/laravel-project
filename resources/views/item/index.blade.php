@@ -24,7 +24,7 @@
                     <form action="{{ url('items') }}" method="get">
                         <div class="form-group d-flex">
                             <div class="control-group mr-2">
-                                <input type="text"  name="keyword" size="100" maxlength="100" value="{{ $keyword }}">
+                                <input type="search"  name="keyword" size="100" maxlength="100" value="{{ $keyword }}">
                             </div>
                             <div class="control-group mr-2">
                                 <select name="typeKeyword" class="h-100">
