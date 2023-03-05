@@ -43,7 +43,7 @@ class HomeController extends Controller
             $query = Item::where('type',$typeKeyword);
         }
         // 上記で取得した$queryをページネートにし、変数$itemsに代入
-        $items = $query->orderByDesc('updated_at')->paginate(6);
+        $items = $query->where('items.status','active')->orderByDesc('updated_at')->paginate(6);
         
         return view('home',[
             'items' => $items,
