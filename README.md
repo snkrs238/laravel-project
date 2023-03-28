@@ -16,5 +16,9 @@
 削除する場合は、商品詳細画面より商品編集画面に移り、削除ボタンで削除を行います。  
 
 **管理画面**
-<img width="1470" alt="スクリーンショット 2023-03-28 12 22 53" src="https://user-images.githubusercontent.com/113812621/228121581-cef9fbb7-fa72-4261-a921-5628a7c1093a.png">
+<img width="1470" alt="スクリーンショット 2023-03-28 12 22 53" src="https://user-images.githubusercontent.com/113812621/228121581-cef9fbb7-fa72-4261-a921-5628a7c1093a.png">  
+
+**フロント画面**
+<img width="1470" alt="スクリーンショット 2023-03-28 22 01 19" src="https://user-images.githubusercontent.com/113812621/228244778-aec2cb8a-0bc1-40b3-be56-22d939d375b5.png">
+
 
