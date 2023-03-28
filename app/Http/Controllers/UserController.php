@@ -170,4 +170,39 @@ class UserController extends Controller
 
         return redirect('/users');
     }
+
+    public function setup(Request $request){
+        $user = Auth::user();
+
+        if ($request->isMethod('post')) {
+        $user = User::find($request->id);
+
+        $this->validate($request, [
+            'name' => 'required|max:100',
+            'email' => 'required','email','unique:user',
+        ],[
+            'name.required'=>'名前は必須です。',
+
+            'email.required'=>'メールアドレスは必須です。',
+            'email.email' => '有効なメールアドレス形式で指定してください。',
+            'email.unique' => '指定のメールアドレスは、既に使用されています。',
+        ]);
+        
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if(isset($request->role)){
+            $user->role = $request->role;
+        }
+        if(isset($request->password)){
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+
+        return redirect('/');
+        }else{
+            return view('user.myPage',[
+                'user'=>$user
+            ]);
+        }
+    }
 }

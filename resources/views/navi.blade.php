@@ -24,6 +24,12 @@
                 <a class="nav-link" href="/users">ユーザー管理</a>
             </li>
             @endcan
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">マイページ</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/myPage/setup/{{Auth::id()}}">設定</a> 
+                </div>
+            </li>
         </ul>
     </div>
 </nav>    

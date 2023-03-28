@@ -38,7 +38,13 @@ Route::prefix('account')->group(function (){
     Route::get('/logout',[\App\Http\Controllers\UserController::class,'logout'])->name('logout');
 });
 
-
+//ログインユーザーのみ
+Route::group(['middleware'=>['auth']],function(){
+    Route::prefix('myPage')->group(function(){
+        Route::get('/setup/{id}',[\App\Http\Controllers\UserController::class,'setup']);
+        Route::post('/setup/{id}',[\App\Http\Controllers\UserController::class,'setup']);
+    });
+});
 
 // 管理者ユーザーのみ
 Route::group(['middleware'=>['auth','can:admin']],function(){
@@ -61,4 +67,5 @@ Route::group(['middleware'=>['auth','can:admin']],function(){
         Route::post('/edit/{id}', [App\Http\Controllers\UserController::class,'edit']);
         Route::post('/delete/{id}', [App\Http\Controllers\UserController::class, 'delete']);
     });
+
 });

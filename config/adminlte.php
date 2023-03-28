@@ -263,6 +263,17 @@ return [
             'url'  => 'users',
             'can' =>'admin',
         ],
+        [
+            'text'=>'マイページ',
+            'icon'=>' fa-smile-o',
+            'submenu' => [
+                [
+                    'text' => '設定',
+                    'url'  => 'myPage/setup/{{Auth::id()}}',
+                    'can'  => 'superAdmin',
+                ],
+            ],
+        ]
 
         
 
