@@ -17,9 +17,10 @@
 
 
 ## 開発環境
--Laravel8
--JQuery
--bootstrap4
+-PHP 7.4
+-Laravel 8.8
+-JQuery 3.6
+-bootstrap 4
 -AdminLTE
 
 --
