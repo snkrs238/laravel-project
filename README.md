@@ -40,3 +40,9 @@
 -商品の絞り込み検索(カテゴリ別)
 -モーダル表示
 -画像のプレビュー表示
+
+
+##　制作物
+-制作物リンク（heroku）：https://item-managements.herokuapp.com/account/login  
+-メールアドレス：admin@gmail.com  
+-パスワード：admin123456  
