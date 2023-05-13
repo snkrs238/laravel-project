@@ -35,14 +35,14 @@
 ## 主な機能
 - 会員登録機能
 - ログイン・ログアウト機能
--商品の登録・更新・削除
--商品の検索機能
--商品の絞り込み検索(カテゴリ別)
--モーダル表示
--画像のプレビュー表示
+- 商品の登録・更新・削除
+- 商品の検索機能
+- 商品の絞り込み検索(カテゴリ別)
+- モーダル表示
+- 画像のプレビュー表示
 
 
 ## 制作物  
--制作物リンク（heroku）：https://item-managements.herokuapp.com/account/login  
--メールアドレス：admin@gmail.com  
--パスワード：admin123456  
+- 制作物リンク（heroku）：https://item-managements.herokuapp.com/account/login  
+- メールアドレス：admin@gmail.com  
+- パスワード：admin123456  
