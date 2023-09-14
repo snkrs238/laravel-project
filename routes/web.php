@@ -32,8 +32,6 @@ Route::prefix('order')->group(function (){
     Route::get('/create/{id}', [App\Http\Controllers\OrderController::class,'order'])->name('order');
     Route::post('/create/{id}', [App\Http\Controllers\OrderController::class,'order'])->name('order');
     Route::post('/delete/{id}', [App\Http\Controllers\OrderController::class,'delete'])->name('delete');
-
-    
 });
 
 
@@ -43,6 +41,12 @@ Route::prefix('stock_movements')->group(function (){
     Route::get('/shipping/{id}', [App\Http\Controllers\StockMovementController::class,'shipping'])->name('shipping');
     Route::post('/shipping/{id}', [App\Http\Controllers\StockMovementController::class,'shipping'])->name('shipping');
 
+});
+Route::prefix('suppliers')->group(function (){
+    Route::get('/',[App\Http\Controllers\SuppliersController::class, 'index']);
+    Route::get('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
+    Route::post('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
+    Route::post('/delete/{id}', [App\Http\Controllers\SuppliersController::class, 'delete']);
 });
 
 Route::prefix('account')->group(function (){
