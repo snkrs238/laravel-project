@@ -274,7 +274,7 @@ return [
             'text' => '仕入業者一覧',
             'icon'    => 'fas fa-fw fa-user',
             'url'  => 'suppliers',
-            'can' =>'Admin',
+            'can' =>'admin',
         ],
         [
             'text' => 'ユーザー管理',
