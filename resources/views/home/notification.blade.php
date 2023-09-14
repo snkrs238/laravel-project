@@ -61,7 +61,7 @@
         </div> --}}
     </div>
     <div class="card ml-3" style="width: 25rem;">
-        <img src="https://jimocoro-cdn.com/ch/jimocoro/wp-content/uploads/2023/03/61117520673f9008a0d6621d47237cb2.jpg" class="card-img-top" alt="...">
+        <img src="https://media.istockphoto.com/id/1414378934/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/%E5%A4%9A%E3%81%8F%E3%81%AE%E3%82%AB%E3%83%A9%E3%83%95%E3%83%AB%E3%81%AA%E5%AD%A6%E7%94%A8%E5%93%81%E3%81%A8%E3%83%90%E3%83%83%E3%82%AF%E3%83%91%E3%83%83%E3%82%AF%E3%81%8C%E9%9D%92%E3%81%84%E8%83%8C%E6%99%AF%E3%81%AB%E9%85%8D%E7%BD%AE%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99.jpg?s=1024x1024&w=is&k=20&c=vFk1FmhgLug2-t2WuDBM45s-1K65JYZu0XsdS6wcyhs=" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">入出庫履歴</h5>
           {{-- <p class="card-text">card's content.</p> --}}
