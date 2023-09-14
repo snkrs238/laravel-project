@@ -91,9 +91,10 @@ Route::group(['middleware'=>['auth','can:admin']],function(){
 
     Route::prefix('suppliers')->group(function (){
         Route::get('/',[App\Http\Controllers\SuppliersController::class, 'index']);
-        Route::get('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
-        Route::post('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
+        Route::get('/create',[App\Http\Controllers\SuppliersController::class, 'create']);
+
         Route::post('/delete/{id}', [App\Http\Controllers\SuppliersController::class, 'delete']);
+        Route::post('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
     });
     
 
