@@ -20,8 +20,8 @@ class Item extends Model
         'price',
         'quantity',
         'image',
-        'production_aria',
-        'detail',
+        'supplier_id',
+        
     ];
 
     public function user(){
@@ -30,6 +30,18 @@ class Item extends Model
     
     public function scopeType($query,$type){
         return $query->where('type',$type);
+    }
+
+    public function orderItems(){
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function stockMovements(){
+        return $this->hasMany(StockMovement::class);
+    }
+
+    public function supplier(){
+        return $this->hasMany(Supplier::class);
     }
 
 

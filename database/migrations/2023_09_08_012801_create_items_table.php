@@ -17,14 +17,14 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('name', 100)->index();
-            $table->string('status', 100)->default('active');
             $table->smallInteger('type')->nullable();
             $table->bigInteger('price')->comment('価格');
             $table->bigInteger('quantity')->comment('在庫数');
             $table->text('image')->nullable()->comment('画像イメージ');
-            $table->smallInteger('production_aria')->nullable()->comment('産地');
-            $table->string('detail', 500)->nullable();
+            $table->bigInteger('supplier_id')->unsigned()->index()->comment('仕入業者のID');
             $table->timestamps();
+
+            $table->foreign('supplier_id')->references('id')->on('suppliers');
         });
     }
 

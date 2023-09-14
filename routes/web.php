@@ -23,10 +23,27 @@ use function PHPSTORM_META\registerArgumentsSet;
 Auth::routes();
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class,'home'])->name('home');
 
 
+Route::prefix('order')->group(function (){
+    Route::get('/', [App\Http\Controllers\OrderController::class,'index'])->name('index');
 
+    Route::get('/create/{id}', [App\Http\Controllers\OrderController::class,'order'])->name('order');
+    Route::post('/create/{id}', [App\Http\Controllers\OrderController::class,'order'])->name('order');
+    Route::post('/delete/{id}', [App\Http\Controllers\OrderController::class,'delete'])->name('delete');
+
+    
+});
+
+
+Route::prefix('stock_movements')->group(function (){
+    Route::get('/',[App\Http\Controllers\StockMovementController::class,'index'])->name('index');
+
+    Route::get('/shipping/{id}', [App\Http\Controllers\StockMovementController::class,'shipping'])->name('shipping');
+    Route::post('/shipping/{id}', [App\Http\Controllers\StockMovementController::class,'shipping'])->name('shipping');
+
+});
 
 Route::prefix('account')->group(function (){
     Route::get('/register',[\App\Http\Controllers\UserController::class,'register']);
@@ -67,5 +84,13 @@ Route::group(['middleware'=>['auth','can:admin']],function(){
         Route::post('/edit/{id}', [App\Http\Controllers\UserController::class,'edit']);
         Route::post('/delete/{id}', [App\Http\Controllers\UserController::class, 'delete']);
     });
+
+    Route::prefix('suppliers')->group(function (){
+        Route::get('/',[App\Http\Controllers\SuppliersController::class, 'index']);
+        Route::get('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
+        Route::post('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
+        Route::post('/delete/{id}', [App\Http\Controllers\SuppliersController::class, 'delete']);
+    });
+    
 
 });

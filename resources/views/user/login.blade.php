@@ -32,9 +32,9 @@
 <div class="login-box container-fluid">
     <div class="row">
         <div class="col-4"></div>
-        <div class="col-4">
+        <div class="col-4 border boder-4">
             <div class="login-box-body">
-                <h3 class="login-box-msg mb-5 text-center">ログインしてください。</h3>
+                <h3 class="login-box-msg m-5 text-center">ログイン</h3>
 
                 <form action="{{ route('login') }}" method="post">
                     @csrf

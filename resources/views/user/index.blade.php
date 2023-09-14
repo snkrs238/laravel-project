@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <form action="/users" method="get">
-                            <input type="serch"  name="keyword" size="100" maxlength="100" value="{{ $keyword }}">
+                            <input type="search"  name="keyword" size="100" maxlength="100" value="{{ $keyword }}">
                             <input type="submit" class="btn btn-sm btn-primary" value="検索">
                     </form>
                 </div>

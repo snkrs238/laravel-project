@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\StockMovement;
+use App\Models\Supplier;
 
 class ItemController extends Controller
 {
@@ -24,11 +29,11 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $keyword =$request->input('keyword');
-        $params = $request->query();
         $typeKeyword = $request->input('typeKeyword');
 
         $query = Item::query();
 
+        //検索機能
         if(isset($keyword) && isset($typeKeyword)){
             $query->where('type',$typeKeyword)
             ->Where('name','LIKE',"%{$keyword}%")
@@ -42,22 +47,25 @@ class ItemController extends Controller
 
         $items =$query->orderByDesc('updated_at')->paginate(15);
         $count = $query->count();
+        $users = Item::with('user:id,name')->get();
 
 
         return view('item.index',[
             'items' => $items,
             'keyword' => $keyword,
             'typeKeyword' =>$typeKeyword,
-            'params' =>$params,
             'count'=>$count,
+            'users' =>$users,
         ]);
     }
 
     /**
-     * 商品登録
+     * 商品登録、発注
      */
     public function add(Request $request)
-    {
+    {   
+        $suppliers = Supplier::all();
+
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
             // バリデーション
@@ -65,76 +73,113 @@ class ItemController extends Controller
                 'name' => 'required|max:100',
                 'type' => 'required',
                 'image' => 'max',
-                'production_aria' => 'required',
                 'price' => 'required',
-                'quantity' => 'required',
-                'detail' => 'required|max:255',
+                'order' => 'required',
                 'image' => 'max:50000',
+                'deliveryDate' => 'required','date',
+                'supplier_id' => 'required',
             ],[
                 'name.required'=>'名前は必須です。',
                 'type.required'=>'種類は必須です。',
-                'production_aria.required'=>'産地は必須です。',
                 'price.required'=>'価格は必須です。',
-                'quantity.required'=>'在庫数は必須です。',
-                'detail.required'=>'詳細は必須です。',
+                'order.required'=>'在庫数は必須です。',
                 'image.max' => '画像サイズを50MB以内にしてください。',
-                'detail.max' => '文字を255文字までにしてください。'
+                'deliveryDate.required' => '納入日を入力してください。',
+                'supplier_id.required' => '仕入れ先を入力してください。',
             ]);
 
-            // 商品登録
-            $items = new Item();
-            $items->user_id = Auth::user()->id;
-            $items->name = $request->name;
-            $items->type = $request->type;
-            if ($request->image == null){
-                $items->image = null;
-            }else{
-                $items->image= base64_encode(file_get_contents($request->image));
-            };
-            $items->production_aria = $request->production_aria;
-            $items->price = $request->price;
-            $items->quantity = $request->quantity;
-            $items->detail = $request->detail;
-            $items->save();
+            
 
-            return redirect('/items');
+            // 商品登録
+            $item = new Item();
+            $item->user_id = Auth::user()->id;
+            $item->name = $request->name;
+            $item->type = $request->type;
+            
+            if ($request->image == null){
+                $item->image = null;
+            }else{
+                $item->image= base64_encode(file_get_contents($request->image));
+            };
+            $item->price = $request->price;
+            $item->quantity = 0;
+            $item->supplier_id = $request->supplier_id;
+            $item->save();
+
+            // 注文を登録
+            $order = new Order; 
+            $order->deliveryDate = $request->deliveryDate;
+            $order->supplier_id = $request->supplier_id;  
+            $order->save();
+
+            // 注文アイテムを登録
+            $order_item =new OrderItem();
+            $order_item->order_id = $order->id;
+            $order_item->item_id = $item->id;
+            $order_item->order = $request->order;
+            $order_item->save();
+
+
+            return redirect('/items')->with('message', '新しい商品が登録されました。');
         }
 
-        return view('item.add');
+        return view('item.add',[
+            'suppliers' => $suppliers,
+        ]);
+    }
+
+    //詳細
+    public function detail(Request $request){
+        $item = Item::where('id','=',$request->id)->first();
+        $suppliers = Supplier::all();
+        return view('item.detail',[
+            'item'=>$item,
+            'suppliers' => $suppliers,
+        ]);
     }
 
     //削除
-    public function detail(Request $request){
-        $item = Item::where('id','=',$request->id)->first();
-        return view('item.detail',['item'=>$item]);
-    }
-
     public function delete(Request $request){
-        Item::find($request->id)->delete();
+        $item_id = $request->id;
 
-        return redirect('/items');
+        // StockMovementモデルから該当商品の在庫移動レコードを削除
+        StockMovement::where('item_id',$item_id)->delete();
+
+        // OrderItemモデルから該当商品の発注アイテムを削除
+        OrderItem::where('item_id',$item_id)->delete();
+
+        // Itemモデルから該当商品を削除
+        Item::find($item_id)->delete();
+
+        // Orderモデルから該当商品の関連する発注を削除
+        $order_id = OrderItem::where('item_id', $item_id)->pluck('order_id')->first();
+        if ($order_id) {
+            Order::find($order_id)->delete();
+        }
+        
+        return redirect('/items')->with('message', '商品が正常に削除されました。');
     }
 
     //編集
     public function edit(Request $request){
         // $item = Item::where('id','=',$request->id)->first();
         $item = Item::find($request->id);
+        // $suppliers = Item::with('supplier:id,name')->get();
+        $suppliers = Supplier::all();
         
         if ($request->isMethod('post')) {
 
             // バリデーション
             $this->validate($request,[
-                'detail'=>'required','max:500',
-                'name'=>'required','max:100',
-                'type' =>'required',
                 'image' => 'max:50000',
+                'supplier_id' => 'required',
+                'price' => 'required',
             ],
             [
-                'name.required' => '名前は必須です',
-                'detail.required' => '詳細は必須です',
-                'type.required' =>'種別を選択してください',
                 'image.max' => '画像サイズを50MB以内にしてください。',
-            ]
+                'supplier_id.required' => '仕入れ先は必須です。',
+                'price.required' => '仕入れ先は必須です。',
+            ],
             );
 
             $item->name= $request->name;
@@ -142,17 +187,20 @@ class ItemController extends Controller
                 $item->image= base64_encode(file_get_contents($request->image));
             };
             $item->type= $request->type;
-            $item->status=$request->status;
-            $item->production_aria = $request->production_aria;
+            $item->supplier_id = $request->supplier_id;
             $item->price = $request->price;
             $item->quantity = $request->quantity;
-            $item->detail = $request->detail;
             $item->save();
 
             return redirect('/items');
 
         }else{
-            return view('item.editor',['item'=>$item]);
+            return view('item.editor',[
+                'item'=>$item,
+                'suppliers' => $suppliers,
+            ]);
         }
     }
+
+    
 }

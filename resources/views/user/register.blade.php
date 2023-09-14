@@ -19,10 +19,10 @@
     @endif
     <div class="row">
         <div class="col-4"></div>
-        <div class="col-4">
+        <div class="col-4 border border-3">
             <form action="{{ route('register') }}" method="post">
                 @csrf
-                <h1 class="login-box-msg text-center">新規登録</h1>
+                <h1 class="login-box-msg text-center mt-3">新規登録</h1>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">名前</label>

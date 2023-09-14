@@ -254,8 +254,27 @@ return [
         [
             'text' => '商品管理',
             'icon' => 'fas fa-fw fa-file',
-            'url'  => 'items',
-            'can' =>'admin',
+             'can'  => 'admin',
+            'submenu' => [
+                [
+                    'text' => '在庫管理',
+                    'url'  => 'items',
+                ],
+                [
+                    'text' => '注文履歴',
+                    'url'  => 'order',
+                ],
+                [
+                    'text' => '出入庫履歴',
+                    'url'  => 'stock_movements',
+                ],
+            ],
+        ],
+        [
+            'text' => '仕入業者一覧',
+            'icon'    => 'fas fa-fw fa-user',
+            'url'  => 'suppliers',
+            'can' =>'superAdmin',
         ],
         [
             'text' => 'ユーザー管理',
@@ -270,7 +289,6 @@ return [
                 [
                     'text' => '設定',
                     'url'  => 'myPage/setup/{{Auth::id()}}',
-                    'can'  => 'superAdmin',
                 ],
             ],
         ]
