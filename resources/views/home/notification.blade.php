@@ -42,13 +42,8 @@
             @foreach ($order_items as $order_item)
             
                 <li class="list-group-item"><span>⚫︎</span>
-                    @foreach ($users as $user)
-                        @if ($user->id == $order_item->item->user_id)
-                            {{ $user->name }}
-                        @endif
-                        @endforeach
-                    <span> さんが </span>{{ $order_item->item->name }}<span> を</span>
-                    {{ $order_item->order }} <span>個発注しました。</span>
+                  {{ $order_item->item->name }}<span> を</span>
+                    {{ $order_item->order }}<span>個発注しました。</span>
                 </li>
             @endforeach
         </ul>
