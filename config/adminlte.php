@@ -271,7 +271,7 @@ return [
             ],
         ],
         [
-            'text' => '仕入業者一覧',
+            'text' => '仕入れ業者一覧',
             'icon'    => 'fas fa-fw fa-user',
             'url'  => 'suppliers',
             'can' =>'admin',
