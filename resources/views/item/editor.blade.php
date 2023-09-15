@@ -109,7 +109,6 @@
             <div class="card-footer justify-content-center ">
                 <button type="submit" class="btn btn-sm btn-primary" id="update">更新</button>
                 <button type="submit" class="btn btn-sm btn-danger" formaction="/items/delete/{{ $item->id }}" id="itemDelete">削除</button>
-                <button type="submit" class="btn btn-sm btn-secondary" formaction="/items" id="item">@method('get') 戻る</button>
             </div>
         </form>
     </div>

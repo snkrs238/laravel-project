@@ -52,9 +52,9 @@
                 </li>
             @endforeach
         </ul>
-        <div class="d-flex justify-content-center mt-3 mb-3">
+        {{-- <div class="d-flex justify-content-center mt-3 mb-3">
             {!! $order_items->links() !!}
-        </div>
+        </div> --}}
         {{-- <div class="card-body">
           <a href="#" class="card-link">Card link</a>
           <a href="#" class="card-link">Another link</a>
@@ -87,9 +87,9 @@
             <a href="#" class="card-link">Card link</a>
             <a href="#" class="card-link">Another link</a>
         </div> --}}
-        <div class="d-flex justify-content-center mt-3 mb-3">
+        {{-- <div class="d-flex justify-content-center mt-3 mb-3">
             {!! $stockMovements->links() !!}
-        </div>
+        </div> --}}
     </div>
 </div>
 

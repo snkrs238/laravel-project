@@ -72,7 +72,6 @@
             </div>
             <div class="card-footer justify-content-center ">
                 <button type="submit" class="btn btn-sm btn-primary" id="update">移動する</button>
-                <button type="submit" class="btn btn-sm btn-secondary" formaction="{{url('/items')}}" id="item">@method('get') 戻る</button>
             </div>
         </form>
     </div>

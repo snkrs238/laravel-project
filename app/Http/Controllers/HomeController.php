@@ -55,11 +55,12 @@ class HomeController extends Controller
         // 上記で取得した$queryをページネート
         $items = $query->orderByDesc('updated_at')->paginate(6);
 
-        $order_items = $queryOrderItem->orderByDesc('updated_at')->paginate(6);
+        $order_items = $queryOrderItem->orderByDesc('updated_at')->take(5)->get();
 
         $users = $queryUser->orderByDesc('updated_at')->paginate(6);
 
-        $stockMovements = $queryStockMovement->orderByDesc('updated_at')->paginate(6);
+        // $stockMovements = $queryStockMovement->orderByDesc('updated_at')->paginate(6);
+        $stockMovements = $queryStockMovement->orderByDesc('updated_at')->take(5)->get();
         
         return view('home.notification',[
             'items' => $items,
