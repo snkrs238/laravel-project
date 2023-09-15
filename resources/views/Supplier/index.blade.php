@@ -59,7 +59,7 @@
                                 <tr>
                                     <td>{{ $supplier->id }}</td>
                                     <td>{{ $supplier->name}}</td>
-                                    <td>{{ $supplier->manager.'様'}}</td>
+                                    <td>{{ $supplier->manager}}</td>
                                     <td>{{ $supplier->phone }}</td>
                                     {{-- <td>
                                         <form method="POST" action="/suppliers/delete/{{ $supplier->id }}" id="itemDelete">
