@@ -10,7 +10,7 @@ class SuppliersController extends Controller
 {
     //仕入業者一覧
     public function index(Request $request){
-        $keyword =$request->input('keyword');
+        // $keyword =$request->input('keyword');
 
         $query = Supplier::query();
 
@@ -26,7 +26,7 @@ class SuppliersController extends Controller
         return view('supplier.index',[
             'suppliers' => $suppliers,
             'count' => $count,
-            'keyword' => $keyword,
+            // 'keyword' => $keyword,
         ]);
     }
 

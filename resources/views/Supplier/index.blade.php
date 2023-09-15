@@ -26,7 +26,7 @@
                     <h3 class="card-title">検索</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('supplier') }}" method="get">
+                    {{-- <form action="{{ url('supplier') }}" method="get">
                         <div class="form-group d-flex">
                             <div class="control-group mr-2">
                                 <input type="search"  name="keyword" size="100" maxlength="100" value="{{ $keyword }}">
@@ -35,7 +35,7 @@
                                 <input type="submit" class="btn btn-sm btn-primary" value="検索">
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
                 <div class="card-footer text-center"></div>
             </div>
