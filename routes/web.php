@@ -42,12 +42,7 @@ Route::prefix('stock_movements')->group(function (){
     Route::post('/shipping/{id}', [App\Http\Controllers\StockMovementController::class,'shipping'])->name('shipping');
 
 });
-    // Route::prefix('suppliers')->group(function (){
-    //     Route::get('/',[App\Http\Controllers\SuppliersController::class, 'index']);
-    //     Route::get('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
-    //     Route::post('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
-    //     Route::post('/delete/{id}', [App\Http\Controllers\SuppliersController::class, 'delete']);
-    // });
+
 
 Route::prefix('account')->group(function (){
     Route::get('/register',[\App\Http\Controllers\UserController::class,'register']);
@@ -91,10 +86,10 @@ Route::group(['middleware'=>['auth','can:admin']],function(){
 
     Route::prefix('suppliers')->group(function (){
         Route::get('/',[App\Http\Controllers\SuppliersController::class, 'index']);
-        Route::get('/create',[App\Http\Controllers\SuppliersController::class, 'create']);
-
-        Route::post('/delete/{id}', [App\Http\Controllers\SuppliersController::class, 'delete']);
+        Route::get('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
         Route::post('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
+        Route::post('/delete/{id}', [App\Http\Controllers\SuppliersController::class, 'delete']);
+        
     });
     
 

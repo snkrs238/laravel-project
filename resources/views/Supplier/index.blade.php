@@ -16,7 +16,7 @@
             @endif
             <div class="card">
                 <div class="card-body text-center">
-                    <form action="{{ url('suppliers/create') }}" method="get">
+                    <form action="{{ url('suppliers/store') }}" method="get">
                         <button type="submit" class="btn btn-md btn-primary">新規登録</button>
                     </form>
                 </div>

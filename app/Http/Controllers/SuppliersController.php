@@ -73,7 +73,9 @@ class SuppliersController extends Controller
 
             return redirect('/suppliers')->with('success', '新しい業者が登録されました。');
         }
-
+        
+        return view('supplier.store'
+        );
         
         
 
