@@ -46,7 +46,7 @@ class StockMovementController extends Controller
             ],
             [
                 'quantity.required' => '在庫数は必須です。',
-                'movement_type' => '移動種類は必須です'
+                'movement_type.required' => '移動種類は必須です'
             ]
             );
             

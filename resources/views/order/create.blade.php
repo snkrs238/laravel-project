@@ -64,7 +64,7 @@
             </div>
             <div class="card-footer justify-content-center ">
                 <button type="submit" class="btn btn-sm btn-primary" id="update">発注する</button>
-                <button type="submit" class="btn btn-sm btn-secondary" formaction="/items" id="item">戻る</button>
+                <button type="submit" class="btn btn-sm btn-secondary" formaction="/items" id="item">@method('get') 戻る</button>
             </div>
         </form>
     </div>
