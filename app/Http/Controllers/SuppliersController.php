@@ -23,7 +23,7 @@ class SuppliersController extends Controller
         $count = $query->count();
         $suppliers =$query->orderByDesc('updated_at')->paginate(15);
 
-        return view('supplier.aa',[
+        return view('supplier.index',[
             'suppliers' => $suppliers,
             'count' => $count,
             'keyword' => $keyword,
@@ -74,7 +74,7 @@ class SuppliersController extends Controller
             return redirect('/suppliers')->with('message', '新しい業者が登録されました。');
         }
 
-        return view('supplier.aaa'
+        return view('supplier.store'
         );
         
     }
