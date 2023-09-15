@@ -11,6 +11,8 @@ class Supplier extends Model
 
     protected $fillable = [
         'name',
+        'manager',
+        'phone',
     ];
 
     public function orders()
