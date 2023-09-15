@@ -23,7 +23,7 @@ class SuppliersController extends Controller
         $count = $query->count();
         $suppliers =$query->orderByDesc('updated_at')->paginate(15);
 
-        return view('supplier.index',[
+        return view('a.aa',[
             'suppliers' => $suppliers,
             'count' => $count,
             'keyword' => $keyword,
