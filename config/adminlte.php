@@ -273,7 +273,7 @@ return [
         [
             'text' => '仕入れ業者一覧',
             'icon'    => 'fas fa-fw fa-user',
-            'url'  => 'items',
+            'url'  => 'suppliers',
             'can' =>'admin',
         ],
         [
