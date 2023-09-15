@@ -88,7 +88,7 @@ Route::group(['middleware'=>['auth','can:admin']],function(){
         Route::get('/',[App\Http\Controllers\SuppliersController::class, 'index']);
         Route::get('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
         Route::post('/store',[App\Http\Controllers\SuppliersController::class, 'store']);
-        Route::post('/delete/{id}', [App\Http\Controllers\SuppliersController::class, 'delete']);
+        // Route::post('/delete/{id}', [App\Http\Controllers\SuppliersController::class, 'delete']);
         
     });
     

@@ -71,19 +71,13 @@ class SuppliersController extends Controller
             $suppliers->phone = $request->phone;
             $suppliers->save();
 
-            return redirect('/suppliers')->with('success', '新しい業者が登録されました。');
+            return redirect('/suppliers')->with('message', '新しい業者が登録されました。');
         }
-        
+
         return view('supplier.store'
         );
         
-        
-
     }
 
-    public function create(Request $request){
-        return view('supplier.store'
-        );
-    }
 
 }
